@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -19,11 +20,19 @@ public class Ticket {
     private String title;
     private String description;
     private String createdBy;
-    private Instant createdOn;
+    private LocalDate createdOn;
     @OneToOne
+    @JoinColumn(name="project_id")
     private Project project;
 
     @ManyToMany
     private List<Developer> developers;
+
+    public Ticket(String title, String description, String createdBy, LocalDate createdOn) {
+        this.title = title;
+        this.description = description;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+    }
 
 }
