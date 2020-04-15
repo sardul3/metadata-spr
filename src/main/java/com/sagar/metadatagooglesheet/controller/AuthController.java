@@ -1,9 +1,7 @@
 package com.sagar.metadatagooglesheet.controller;
 
-import com.sagar.metadatagooglesheet.dto.AuthenticationRequest;
-import com.sagar.metadatagooglesheet.dto.AuthenticationResponse;
-import com.sagar.metadatagooglesheet.dto.LoginRequest;
-import com.sagar.metadatagooglesheet.dto.LoginResponse;
+import com.sagar.metadatagooglesheet.dto.*;
+import com.sagar.metadatagooglesheet.service.AuthService;
 import com.sagar.metadatagooglesheet.service.MyUserDetailsService;
 import com.sagar.metadatagooglesheet.util.JwtUtil;
 import lombok.AllArgsConstructor;
@@ -14,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -25,6 +24,8 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final MyUserDetailsService userDetailsService;
     private final JwtUtil jwtTokenUtil;
+    private final AuthService authService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
@@ -43,7 +44,11 @@ public class AuthController {
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         final String loggedInUser = jwtTokenUtil.extractUsername(jwt);
         return ResponseEntity.status(HttpStatus.OK).body(new AuthenticationResponse(jwt, loggedInUser));
+    }
 
-
+    @PostMapping("/signup")
+    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
+        authService.signup(registerRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(registerRequest.getEmail());
     }
 }
