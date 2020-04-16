@@ -32,6 +32,9 @@ public class Ticket {
     )
     private List<Developer> developers;
 
+    @OneToMany
+    private List<Note> notes;
+
     public Ticket(String title, String description, String createdBy, Date createdOn) {
         this.title = title;
         this.description = description;
@@ -39,6 +42,9 @@ public class Ticket {
         this.createdOn = createdOn;
     }
 
+    public List<Note> getNotes() {
+        return  this.notes;
+    }
     public Long getId() {
         return this.id;
     }
