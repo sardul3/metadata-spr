@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,8 @@ public class TicketService {
     private final ProjectRepository projectRepository;
     private final DeveloperRepository developerRepository;
 
-    public Ticket addTicket(String name, String desc, long projectId, String createdBy, LocalDate createdOn) {
+    public Ticket addTicket(String name, String desc, long projectId, String createdBy, Date createdOn) {
+        log.info(String.valueOf(createdOn));
         Ticket ticket = new Ticket(name, desc, createdBy, createdOn);
         ticket.setProject(projectRepository.findById(projectId).get());
         return ticketRepository.save(ticket);

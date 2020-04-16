@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Ticket {
     private String title;
     private String description;
     private String createdBy;
-    private LocalDate createdOn;
+    private Date createdOn;
     @OneToOne
     @JoinColumn(name="project_id")
     private Project project;
@@ -31,7 +32,7 @@ public class Ticket {
     )
     private List<Developer> developers;
 
-    public Ticket(String title, String description, String createdBy, LocalDate createdOn) {
+    public Ticket(String title, String description, String createdBy, Date createdOn) {
         this.title = title;
         this.description = description;
         this.createdBy = createdBy;
@@ -54,7 +55,7 @@ public class Ticket {
         return this.createdBy;
     }
 
-    public LocalDate getCreatedOn() {
+    public Date getCreatedOn() {
         return this.createdOn;
     }
 
@@ -82,7 +83,7 @@ public class Ticket {
         this.createdBy = createdBy;
     }
 
-    public void setCreatedOn(LocalDate createdOn) {
+    public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
     }
 

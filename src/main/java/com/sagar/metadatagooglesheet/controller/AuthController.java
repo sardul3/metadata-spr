@@ -39,6 +39,8 @@ public class AuthController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
         } catch(BadCredentialsException ex) {
             throw new Exception("Incorrect username or password", ex);
+
+
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
@@ -47,8 +49,13 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
-        authService.signup(registerRequest);
-        return ResponseEntity.status(HttpStatus.OK).body(registerRequest.getEmail());
+    public ResponseEntity<RegisterResponse> signup(@RequestBody RegisterRequest registerRequest) throws Exception {
+        log.info(String.valueOf(registerRequest));
+        try {
+            authService.signup(registerRequest);
+        } catch(Exception e) {
+            throw new Exception("Registration not success", e);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(new RegisterResponse(registerRequest.getUsername()));
     }
 }
