@@ -31,6 +31,8 @@ public class Ticket {
             inverseJoinColumns = @JoinColumn(name="developer_id")
     )
     private List<Developer> developers;
+    private String status;
+
 
     @OneToMany
     private List<Note> notes;
@@ -47,6 +49,10 @@ public class Ticket {
     }
     public Long getId() {
         return this.id;
+    }
+
+    public String getStatus() {
+        return this.status;
     }
 
     public String getTitle() {
@@ -80,6 +86,11 @@ public class Ticket {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 
     public void setDescription(String description) {
         this.description = description;

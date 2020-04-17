@@ -19,6 +19,7 @@ public class Developer {
     private String name;
     private String email;
     private String title;
+    private String avatar;
 
     @OneToOne
     private Project project;
@@ -31,5 +32,12 @@ public class Developer {
             inverseJoinColumns = @JoinColumn(name="ticket_id")
     )
     private List<Ticket> tickets;
+
+    public Developer(String name, String email, String title, String avatar) {
+        this.name = name;
+        this.email = email;
+        this.title = title;
+        this.avatar = avatar;
+    }
 
 }

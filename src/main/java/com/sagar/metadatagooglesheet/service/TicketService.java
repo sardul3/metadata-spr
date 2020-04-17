@@ -2,6 +2,7 @@ package com.sagar.metadatagooglesheet.service;
 
 import com.sagar.metadatagooglesheet.dto.AddDeveloperRequest;
 import com.sagar.metadatagooglesheet.dto.AddNoteRequest;
+import com.sagar.metadatagooglesheet.dto.SetStatusRequest;
 import com.sagar.metadatagooglesheet.model.Developer;
 import com.sagar.metadatagooglesheet.model.Note;
 import com.sagar.metadatagooglesheet.model.Ticket;
@@ -70,5 +71,12 @@ public class TicketService {
 
     public Optional<Ticket> getTicket(long id) {
         return ticketRepository.findById(id);
+    }
+
+    public Ticket setStatus(SetStatusRequest setStatusRequest) {
+        Ticket ticket = ticketRepository.findById(setStatusRequest.getTicketId()).get();
+        ticket.setStatus(setStatusRequest.getStatus());
+        ticketRepository.save(ticket);
+        return ticket;
     }
 }

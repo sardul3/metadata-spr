@@ -24,4 +24,5 @@ public class User {
     private String email;
     private Instant created;
     private boolean enabled;
+    private String avatar;
 }

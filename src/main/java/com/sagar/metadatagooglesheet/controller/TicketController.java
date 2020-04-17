@@ -1,12 +1,10 @@
 package com.sagar.metadatagooglesheet.controller;
 
-import com.sagar.metadatagooglesheet.dto.AddDeveloperRequest;
-import com.sagar.metadatagooglesheet.dto.AddNoteRequest;
-import com.sagar.metadatagooglesheet.dto.RemoveDeveloperFromTicketRequest;
-import com.sagar.metadatagooglesheet.dto.TicketRequest;
+import com.sagar.metadatagooglesheet.dto.*;
 import com.sagar.metadatagooglesheet.model.Ticket;
 import com.sagar.metadatagooglesheet.service.TicketService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +15,7 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @CrossOrigin
+@Slf4j
 public class TicketController {
     private final TicketService ticketService;
 
@@ -51,6 +50,13 @@ public class TicketController {
     @PostMapping("/add-note")
     public ResponseEntity<Ticket> addNote(@RequestBody AddNoteRequest addNoteRequest) {
         Ticket ticket = ticketService.addNotesToTicket(addNoteRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(ticket);
+    }
+
+    @PostMapping("/set-status")
+    public ResponseEntity<Ticket> setStatus(@RequestBody SetStatusRequest setStatusRequest) {
+        Ticket ticket = ticketService.setStatus(setStatusRequest);
+        log.info(String.valueOf(ticket));
         return ResponseEntity.status(HttpStatus.OK).body(ticket);
     }
 }
