@@ -1,7 +1,6 @@
 package com.sagar.metadatagooglesheet.controller;
 
 import com.sagar.metadatagooglesheet.dto.*;
-import com.sagar.metadatagooglesheet.model.Developer;
 import com.sagar.metadatagooglesheet.model.Notification;
 import com.sagar.metadatagooglesheet.model.Ticket;
 import com.sagar.metadatagooglesheet.repository.NotificationRepository;
@@ -11,8 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
