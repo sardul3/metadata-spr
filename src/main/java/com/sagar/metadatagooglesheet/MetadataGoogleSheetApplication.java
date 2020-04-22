@@ -41,7 +41,7 @@ import java.util.Optional;
 @SpringBootApplication
 @Slf4j
 @AllArgsConstructor
-public class MetadataGoogleSheetApplication  extends SpringBootServletInitializer {
+public class MetadataGoogleSheetApplication {
 	private MetadataService metadataService;
 
 	public static void main(String[] args) throws GeneralSecurityException, IOException {
