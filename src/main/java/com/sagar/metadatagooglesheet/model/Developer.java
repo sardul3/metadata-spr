@@ -33,6 +33,9 @@ public class Developer {
     )
     private List<Ticket> tickets;
 
+    @OneToMany
+    private List<Notification> notifications;
+
     public Developer(String name, String email, String title, String avatar) {
         this.name = name;
         this.email = email;

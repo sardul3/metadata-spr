@@ -42,6 +42,7 @@ public class Ticket {
         this.description = description;
         this.createdBy = createdBy;
         this.createdOn = createdOn;
+        this.status = "Not Started";
     }
 
     public List<Note> getNotes() {

@@ -31,7 +31,6 @@ public class AuthService {
         user.setCreated(Instant.now());
         user.setEnabled(true);
         user.setAvatar(Integer.toString((int) Math.floor(Math.random()*10+1)));
-        log.info(String.valueOf(user));
 
         developerRepository.save(new Developer(user.getUsername(), user.getEmail(), "Developer", user.getAvatar()));
 

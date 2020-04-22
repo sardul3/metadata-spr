@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +36,6 @@ public class AuthController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticateUser(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-        log.info(String.valueOf(authenticationRequest));
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
         } catch(BadCredentialsException ex) {
@@ -50,12 +51,17 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<RegisterResponse> signup(@RequestBody RegisterRequest registerRequest) throws Exception {
-        log.info(String.valueOf(registerRequest));
         try {
             authService.signup(registerRequest);
         } catch(Exception e) {
             throw new Exception("Registration not success", e);
         }
         return ResponseEntity.status(HttpStatus.OK).body(new RegisterResponse(registerRequest.getUsername()));
+    }
+
+    @GetMapping("/get-user")
+    public ResponseEntity<User> getUser() {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ResponseEntity.status(HttpStatus.OK).body(principal);
     }
 }

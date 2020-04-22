@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,7 +41,7 @@ import java.util.Optional;
 @SpringBootApplication
 @Slf4j
 @AllArgsConstructor
-public class MetadataGoogleSheetApplication implements CommandLineRunner {
+public class MetadataGoogleSheetApplication  extends SpringBootServletInitializer {
 	private MetadataService metadataService;
 
 	public static void main(String[] args) throws GeneralSecurityException, IOException {
@@ -49,10 +50,10 @@ public class MetadataGoogleSheetApplication implements CommandLineRunner {
 
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
+//	@Override
+//	public void run(String... args) throws Exception {
 //		metadataService.saveToDb();
-	}
+//	}
 
 
 
